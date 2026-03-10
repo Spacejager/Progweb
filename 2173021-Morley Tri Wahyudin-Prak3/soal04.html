@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Soal 04_Form Tambah Data User_2173021-Morley Tri Wahyudini</title>
+</head>
+<body>
+    <form onsubmit="return validateForm()">
+        <fieldset>
+            <legend><h2>Form Tambah Data User</h2></legend>
+            <label for="name">Name :</label>
+            <input type="text" id="name" name="name" required>
+            <span id="nameError" style="color:red"></span>
+            <br>
+            
+            <label for="address">Address :</label>
+            <input type="text" id="address" name="address" required>
+            <span id="addressError" style="color:red"></span>
+            <br>
+            
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+            <span id="emailError" style="color:red"></span>
+            <br>
+            
+            <label for="homepage">Home Page :</label>
+            <input type="url" id="homepage" name="homepage">
+            <br>
+            
+            <label for="birthday">Birthday :</label>
+            <input type="date" id="birthday" name="birthday">
+            <br>
+            
+            <label for="color">Favorite Color :</label>
+            <input type="color" id="color" name="color">
+            <br>
+            
+            <label for="ipk">IPK :</label>
+            <input type="number" id="ipk" name="ipk" min="0" max="4" step="0.1" value="0">
+            <br>
+            
+            <label for="phone">Phone Number :</label>
+            <input type="tel" id="phone" name="phone" pattern="\d{3}-\d{7,10}" placeholder="###-#######">
+            <br>
+            
+            <button type="submit">Add</button>
+        </fieldset>
+    </form>
+
+    <script>
+        function validateForm() {
+            let name = document.getElementById("name").value;
+            let address = document.getElementById("address").value;
+            let email = document.getElementById("email").value;
+            let phone = document.getElementById("phone").value;
+            
+            let emailPattern = /.+@.+\..+/;
+            let phonePattern = /^\d{3}-\d{7,10}$/;
+
+            document.getElementById("nameError").innerText = name ? "" : "Name is required!!!";
+            document.getElementById("addressError").innerText = address ? "" : "Address is required!!!";
+            document.getElementById("emailError").innerText = email ? "" : "Harap isi bidang ini.";
+            
+            if (email && !emailPattern.test(email)) {
+                document.getElementById("emailError").innerText = "Sertakan '@' pada alamat email ini. '" + email + "' tidak memiliki '@'.";
+                return false;
+            }
+            
+            if (phone && !phonePattern.test(phone)) {
+                alert("Format nomor telepon salah. Gunakan format ###-####### atau ###-##########");
+                return false;
+            }
+            
+            alert("Data anda sudah berhasil diproses. Terima kasih.");
+            return true;
+        }
+    </script>
+</body>
+</html>

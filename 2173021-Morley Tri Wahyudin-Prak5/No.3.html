@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<head>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            background-color: red;
+            height: 100px;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .left {
+            background-color: blue;
+            width: 150px;
+            height: 200px;
+            float: left;
+        }
+        .main {
+            background-color: green;
+            width: calc(100% - 170px);
+            float: left;
+            height: 300px;
+            margin-left: 20px;
+        }
+
+        .sidebar {
+            background-color: yellow;
+            width: 150px;
+            height: 150px;
+            padding: 10px;
+            float: right;
+            margin-right: 8px;
+            margin-top: 8px;
+        }
+
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="header"></div>
+    <div class="left"></div>
+    <div 
+        class="clearfix">
+        <div class="main">
+            <div class="sidebar" width="170" height="170"></div>
+            <p>content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content</p>
+            <br><br>
+            <p>content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content content</p>
+        </div>
+
+    </div>
+</body>
+</html>

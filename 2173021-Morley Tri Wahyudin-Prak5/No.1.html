@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        
+        .hover .image-container {
+            border:1px solid #FF00FF;
+        }
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .image-container img {
+            width: 300px;
+            height: auto;
+        }
+
+        .image-container::before,
+        .image-container::after {
+            content: "";
+            position: absolute;
+            border: 5px solid #FF0000;
+        }
+
+        .image-container::before {
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .image-container::after {
+            bottom: 0;
+            right: 0;
+            width: 30px;
+            height: 30px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .image-container::before,
+        .image-container::after {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="image-container">
+        <img src="D:\Progweb\Prak5\img\star.jpg" alt="Star Image">
+    </div>
+
+</body>
+</html>

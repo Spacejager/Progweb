@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyramid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .input-group {
+            margin-bottom: 10px;
+        }
+        .input-group label {
+            margin-right: 10px;
+        }
+        .input-group input {
+            padding: 5px;
+            width: 100px;
+        }
+        button {
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+        table {
+            border-collapse: collapse;
+            width: 800px;
+            height: 600px;
+            margin-top: 20px;
+        }
+        td {
+            border: 1px solid #ccc;
+            background-color: white;
+        }
+        .filled {
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-group">
+            <label>Tinggi Piramida:</label>
+            <input type="number" id="tinggi" value="5">
+            <button onclick="generatePyramid()">Proses</button>
+        </div>
+        <table id="pyramid-table"></table>
+    </div>
+
+    <script>
+        function generatePyramid() {
+            
+            const tinggi = parseInt(document.getElementById('tinggi').value);
+
+            if (isNaN(tinggi) || tinggi <= 0) {
+                alert("Masukkan tinggi yang valid (angka positif)!");
+                return;
+            }
+            const table = document.getElementById('pyramid-table');
+            table.innerHTML = ''; 
+            const lebarDasar = 2 * tinggi - 1;
+            for (let i = 0; i < tinggi; i++) {
+                const row = document.createElement('tr');   
+                const jumlahKotak = 2 * i + 1;  
+                const spasi = (lebarDasar - jumlahKotak) / 2;
+                for (let j = 0; j < spasi; j++) {
+                    const cell = document.createElement('td');
+                    row.appendChild(cell);
+                }
+                for (let j = 0; j < jumlahKotak; j++) {
+                    const cell = document.createElement('td');
+                    cell.classList.add('filled');
+                    row.appendChild(cell);
+                }
+                for (let j = 0; j < spasi; j++) {
+                    const cell = document.createElement('td');
+                    row.appendChild(cell);
+                }
+
+                table.appendChild(row);
+            }
+        }
+        window.onload = generatePyramid;
+    </script>
+</body>
+</html>

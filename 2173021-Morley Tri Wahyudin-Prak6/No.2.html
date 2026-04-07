@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            border: 2px solid #ccc;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 50px);
+            grid-template-rows: repeat(8, 50px);
+            gap: 5px;
+            text-align: center;
+            font-size: 20px;
+        }
+        .result-grid div {
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="result-grid" id="multiplication-table">
+            
+        </div>
+    </div>
+
+    <script>
+        function generateTable() {
+            let number;
+            let isValid = false;
+
+            
+            while (!isValid) {
+                number = prompt("A number?");
+                
+                
+                if (number === null || number.trim() === "" || isNaN(number)) {
+                    continue; 
+                } else {
+                    number = parseInt(number); 
+                    if (number <= 0) {
+                        continue; 
+                    }
+                    isValid = true; 
+                }
+            }
+
+           
+            const table = document.getElementById('multiplication-table');
+            table.innerHTML = ''; 
+
+            
+            for (let i = 1; i <= 8; i++) {
+                const result = i * number;
+
+                
+                const cell1 = document.createElement('div');
+                cell1.innerText = i;
+
+                const cell2 = document.createElement('div');
+                cell2.innerText = '×';
+
+                const cell3 = document.createElement('div');
+                cell3.innerText = number;
+
+                const cell4 = document.createElement('div');
+                cell4.innerText = '=';
+
+                const cell5 = document.createElement('div');
+                cell5.innerText = result;
+
+                
+                table.appendChild(cell1);
+                table.appendChild(cell2);
+                table.appendChild(cell3);
+                table.appendChild(cell4);
+                table.appendChild(cell5);
+            }
+        }
+
+        
+        window.onload = generateTable;
+    </script>
+</body>
+</html>

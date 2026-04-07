@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konversi Bilangan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            border: 2px solid #ccc;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: inline-block;
+            width: 80px;
+        }
+        .input-group input, .input-group select {
+            width: 150px;
+            padding: 5px;
+        }
+        button {
+            padding: 5px 15px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="input-group">
+            <label>Input:</label>
+            <input type="text" id="input">
+        </div>
+        <div class="input-group">
+            <label>Output:</label>
+            <input type="text" id="output" readonly>
+        </div>
+        <div class="input-group">
+            <select id="mode" onchange="updateInputValidation()">
+                <option value="decimal-biner">decimal-biner</option>
+                <option value="biner-decimal">biner-decimal</option>
+            </select>
+        </div>
+        <button onclick="proses()">Proses</button>
+        <button onclick="reset()">Reset</button>
+    </div>
+
+    <script>
+        function updateInputValidation() {
+            const mode = document.getElementById('mode').value;
+            const input = document.getElementById('input');
+
+            if (mode === 'decimal-biner') {
+                input.setAttribute('type', 'number');
+                input.setAttribute('min', '0');
+                input.setAttribute('max', '255');
+            } else {
+                input.setAttribute('type', 'text');
+                input.removeAttribute('min');
+                input.removeAttribute('max');
+            }
+        }
+
+        function decimalToBinary(decimal) {
+            if (decimal === 0) return '00000000'; // Kasus khusus untuk 0
+
+            let binary = '';
+            let num = decimal;
+
+            // Konversi manual desimal ke biner
+            while (num > 0) {
+                binary = (num % 2) + binary;
+                num = Math.floor(num / 2);
+            }
+
+            // Pastikan panjang biner 8 digit dengan menambahkan 0 di depan jika perlu
+            while (binary.length < 8) {
+                binary = '0' + binary;
+            }
+
+            return binary;
+        }
+
+        function binaryToDecimal(binary) {
+            let decimal = 0;
+
+            
+            for (let i = 0; i < binary.length; i++) {
+                const digit = parseInt(binary[i]);
+                const power = binary.length - 1 - i;
+                decimal += digit * Math.pow(2, power);
+            }
+
+            return decimal;
+        }
+
+        function proses() {
+            const mode = document.getElementById('mode').value;
+            const input = document.getElementById('input').value;
+            const output = document.getElementById('output');
+
+            if (mode === 'decimal-biner') {
+                
+                const decimal = parseInt(input);
+                if (isNaN(decimal) || decimal < 0 || decimal > 255) {
+                    alert("Input harus berupa angka desimal antara 0 dan 255!");
+                    return;
+                }
+
+                
+                const result = decimalToBinary(decimal);
+                output.value = result;
+
+            } else {
+                
+                if (!/^[01]{8}$/.test(input)) {
+                    alert("Input harus berupa 8 digit biner (hanya 0 atau 1)!");
+                    return;
+                }
+                const result = binaryToDecimal(input);
+                output.value = result;
+            }
+        }
+
+        function reset() {
+            document.getElementById('input').value = '';
+            document.getElementById('output').value = '';
+        }
+        
+        window.onload = updateInputValidation;
+    </script>
+</body>
+</html>

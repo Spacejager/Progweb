@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>Highlighted Table </title>
+<style>
+  table { border-collapse: collapse; width: 480px; font-family: Georgia, serif; }
+  th, td { padding: 8px 12px; border: 1px solid #ccc; text-align: left; }
+  thead th { background:#BFD6C4; }
+  /* baris bergantian */
+  .rowA { background:#CFE8FF; }   /* biru muda */
+  .rowB { background:#FFD9C2; }   /* oranye muda */
+  /* class hijau saat hover */
+  .c3  { background: #CCFFAA !important; }
+  /* sedikit style number column */
+  .num { width: 40px; text-align:center; }
+</style>
+</head>
+<body>
+
+<table>
+  <thead>
+    <tr><th>Position</th><th>Programming Language</th><th>Ratings</th></tr>
+  </thead>
+  <tbody>
+    <tr class="rowA" onmouseover="rowHover(this)" onmouseout="rowOut(this)"><td class="num">1</td><td>C</td><td>18.058%</td></tr>
+    <tr class="rowB" onmouseover="rowHover(this)" onmouseout="rowOut(this)"><td class="num">2</td><td>Java</td><td>18.051%</td></tr>
+    <tr class="rowA" onmouseover="rowHover(this)" onmouseout="rowOut(this)"><td class="num">3</td><td>C++</td><td>9.707%</td></tr>
+    <tr class="rowB" onmouseover="rowHover(this)" onmouseout="rowOut(this)"><td class="num">4</td><td>PHP</td><td>9.662%</td></tr>
+    <tr class="rowA" onmouseover="rowHover(this)" onmouseout="rowOut(this)"><td class="num">5</td><td>(Visual) Basic</td><td>6.392%</td></tr>
+  </tbody>
+</table>
+
+<script>
+  function rowHover(row){
+
+    if (!row.dataset.origClass) row.dataset.origClass = row.className || "";
+    row.className = row.dataset.origClass + " c3";
+  }
+  function rowOut(row){
+    
+    row.className = row.dataset.origClass || "";
+  }
+</script>
+
+</body>
+</html>

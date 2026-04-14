@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <title>Character Counter</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    label { display:block; margin:8px 0 4px; }
+    textarea { width: 320px; height: 140px; resize: vertical; }
+    .counter {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 8px;
+      border: 1px solid #ccc;
+      background: #fff;
+      border-radius: 4px;
+      float: right;
+    }
+    .row { max-width: 420px; }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <label>Judul :</label>
+    <input type="text" style="width:320px;" />
+
+    <label>Deskripsi :</label>
+    <textarea id="deskripsi"
+      onkeydown="call_onKeyPress(this)"
+      onkeyup="call_onKeyPress(this)"
+      oninput="call_onInput(this)"
+      onpaste="setTimeout(()=>call_onInput(this), 0)"
+      maxlength="256"
+    ></textarea>
+
+    <div class="counter" id="counter">0/256</div>
+  </div>
+
+  <script>
+    const MAX_CHARS = 256;
+    //Max character yang bisa diinput.
+    function call_onKeyPress(ob){
+      let obval = ob.value;
+    
+      if (obval.length > MAX_CHARS){
+        obval = obval.substr(0, MAX_CHARS);
+        ob.value = obval;
+      }
+      document.getElementById("counter").textContent = obval.length + "/" + MAX_CHARS;
+    }
+
+    // Use oninput/paste handler for better coverage (mobile, composition, drag/drop)
+    function call_onInput(ob){
+      let obval = ob.value;
+      if (obval.length > MAX_CHARS){
+        obval = obval.substr(0, MAX_CHARS);
+        ob.value = obval;
+      }
+      document.getElementById("counter").textContent = obval.length + "/" + MAX_CHARS;
+    }
+
+    // Initialize counter when page loads
+    document.addEventListener("DOMContentLoaded", function(){
+      call_onInput(document.getElementById("deskripsi"));
+    });
+  </script>
+</body>
+</html>

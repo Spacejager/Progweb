@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <title>Form Data</title>
+  <style>
+    body { font-family: sans-serif; padding: 12px; }
+    label { display:block; margin-top:8px; font-weight:bold; }
+    input, select, button { margin:6px 0; }
+    #hasil { width:300px; }
+  </style>
+</head>
+<body>
+  <label>Data</label>
+  <input id="txtData" type="text" placeholder="Masukkan angka" />
+  <button id="btnAdd">Add</button>
+
+  <label>Pilih Operasi</label>
+  <select id="opsi">
+    <option value="">-- Pilih Operasi --</option>
+    <option value="display">Display</option>
+    <option value="count">Count</option>
+    <option value="sum">Sum</option>
+    <option value="average">Average</option>
+    <option value="max">Max</option>
+    <option value="min">Min</option>
+    <option value="ganjil">Ganjil</option>
+    <option value="genap">Genap</option>
+    <option value="hapus">Hapus</option>
+  </select>
+
+  <label>Hasil</label>
+  <input id="hasil" readonly />
+
+  <script>
+    // array untuk menyimpan angka
+    const arr = [];
+
+    const txtData = document.getElementById('txtData');
+    const btnAdd = document.getElementById('btnAdd');
+    const opsi = document.getElementById('opsi');
+    const hasil = document.getElementById('hasil');
+
+    // fungsi bantu untuk menampilkan hasil (string)
+    function tampilkan(text) {
+      hasil.value = text;
+    }
+
+    // tombol Add: parse angka, push ke array, kosongkan input, fokus kembali
+    btnAdd.addEventListener('click', () => {
+      const val = txtData.value.trim();
+      if (val === '') return; // tidak melakukan apa-apa bila kosong
+
+      // terima angka bulat atau desimal
+      const num = Number(val);
+      if (Number.isNaN(num)) {
+        tampilkan('Masukkan angka valid');
+        txtData.select();
+        txtData.focus();
+        return;
+      }
+
+      arr.push(num);
+      txtData.value = '';    // hapus angka di text input setelah ditambahkan
+      txtData.focus();       // agar user langsung bisa input baru
+      tampilkan('Berhasil ditambahkan: ' + num);
+    });
+
+    // event onChange pada combobox untuk memilih operasi
+    opsi.addEventListener('change', () => {
+      const pilihan = opsi.value;
+      if (!pilihan) return;
+
+      if (pilihan === 'display') {
+        tampilkan(arr.length ? arr.join(', ') : 'Array kosong');
+      } else if (pilihan === 'count') {
+        tampilkan(String(arr.length));
+      } else if (pilihan === 'sum') {
+        const s = arr.reduce((a,b)=>a+b, 0);
+        tampilkan(String(s));
+      } else if (pilihan === 'average') {
+        if (arr.length === 0) tampilkan('Array kosong');
+        else {
+          const s = arr.reduce((a,b)=>a+b,0);
+          tampilkan(String(s / arr.length));
+        }
+      } else if (pilihan === 'max') {
+        if (arr.length === 0) tampilkan('Array kosong');
+        else tampilkan(String(Math.max(...arr)));
+      } else if (pilihan === 'min') {
+        if (arr.length === 0) tampilkan('Array kosong');
+        else tampilkan(String(Math.min(...arr)));
+      } else if (pilihan === 'ganjil') {
+        const g = arr.filter(n => Number.isInteger(n) && Math.abs(n % 2) === 1);
+        tampilkan(g.length ? g.join(', ') : 'Tidak ada nilai ganjil');
+      } else if (pilihan === 'genap') {
+        const p = arr.filter(n => Number.isInteger(n) && n % 2 === 0);
+        tampilkan(p.length ? p.join(', ') : 'Tidak ada nilai genap');
+      } else if (pilihan === 'hapus') {
+        arr.length = 0;
+        tampilkan('Array dikosongkan');
+      }
+
+      // reset combobox ke pilihan awal agar user bisa memilih lagi tanpa memilih yang sama dua kali
+      opsi.value = '';
+    });
+
+    // optional: enter di input sama dengan klik Add
+    txtData.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); btnAdd.click(); }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2173021 Morley Tri Wahyudin Soal 1</title>
+    
+    <script src="jquery-4.0.0.min.js"></script>
+
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        
+        ol {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Styling untuk menu utama (horizontal) */
+        .main-menu > li.item {
+            float: left;
+            background-color: #ff1493; 
+            color: white;
+            padding: 5px 10px;
+            margin-right: 15px;
+            position: relative; /* Agar sub-menu bisa absolute terhadap li ini */
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Styling untuk sub-menu (dropdown) */
+        .main-menu > li.item > ol {
+            position: absolute;
+            top: 100%; 
+            left: 0;
+            background-color: white;
+            border: 3px solid #ff1493; 
+            min-width: 150px;
+            padding: 5px;
+            margin-top: 2px;
+        }
+
+        /* Styling untuk item di dalam sub-menu */
+        .main-menu > li.item > ol > li {
+            color: #000;
+            padding: 2px 5px;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .main-menu > li.item > ol > li:hover {
+            background-color: #f0f0f0; 
+        }
+
+        
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+    </style>
+</head>
+<body>
+
+    <ol class="main-menu clearfix">
+        <li class="item">jQuery
+            <ol>
+                <li>Download</li>
+                <li>Documentation</li>
+                <li>Blog</li>
+            </ol>
+        </li>
+        <li class="item">Community
+            <ol>
+                <li>Mailing List</li>
+                <li>Tutorials</li>
+                <li>Demos</li>
+                <li>Plugins</li>
+            </ol>
+        </li>
+        <li class="item">Development
+            <ol>
+                <li>Source Code</li>
+                <li>Bug Tracking</li>
+                <li>Recent Changes</li>
+            </ol>
+        </li>
+    </ol>
+
+    <script>
+        $(document).ready(function() {
+        
+            $("li.item ol").hide();
+            $("li.item").hover(
+                function() {
+                    $(this).children("ol").show();
+                }, 
+                function() {
+                    $(this).children("ol").hide();
+                }
+            );
+        });
+    </script>
+
+</body>
+</html>

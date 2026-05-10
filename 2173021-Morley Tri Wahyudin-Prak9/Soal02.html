@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2173021 Morley Tri Wahyudin Soal 2</title>
+    
+    <script src="jquery-4.0.0.min.js"></script>
+
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif; 
+            margin: 20px;
+            font-size: 16px;
+        }
+
+        #controls {
+            margin-bottom: 10px;
+        }
+        
+        input[type="text"] {
+            width: 150px;
+            padding: 2px 5px;
+        }
+        
+        button {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="controls">
+        <input type="text" id="keyword" placeholder="Masukkan nama...">
+        <button id="btnAdd">Add</button>
+        <button id="btnSearch">Search</button>
+    </div>
+
+    <div id="nameList">
+        <div>John Resig</div>
+        <div>George Martin</div>
+        <div>Malcom John Sinclair</div>
+        <div>J. Ohn</div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#btnAdd").click(function() {
+                var newName = $("#keyword").val(); // Ambil teks dari input
+                
+                
+                if(newName !== "") {
+                    $("<div>" + newName + "</div>").appendTo("#nameList");
+                    
+                    $("#keyword").val(""); 
+                }
+            });           
+            $("#btnSearch").click(function() {
+                var searchString = $("#keyword").val(); 
+
+                $("#nameList div").css("text-decoration", "none");
+
+                if(searchString !== "") {
+                    $("#nameList div:contains('" + searchString + "')").css("text-decoration", "underline");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

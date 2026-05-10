@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2173021 Morley Tri Wahyudin Soal 05</title>
+    
+    <script src="jquery-4.0.0.min.js"></script>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #f9f9f9;
+            width: 300px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+        }
+
+        .company {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: black; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <input type="text" id="searchBox">
+        
+        <div id="companyList">
+            <div class="company">Sun Microsystem</div>
+            <div class="company">Apache Software Foundation</div>
+            <div class="company">Oracle Coorporation</div>
+            <div class="company">International Bussiness Machines</div>
+            <div class="company">Microsoft Coorporation</div>
+            <div class="company">Apple Inc</div>
+            <div class="company">Sap Ag</div>
+            <div class="company">Accenture</div>
+            <div class="company">Computer Sciences Coorporation</div>
+            <div class="company">Google</div>
+            <div class="company">Softbank</div>
+            <div class="company">Yahoo</div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+
+            // Menggunakan event 'keyup' agar setiap kali tombol keyboard dilepas (user selesai mengetik 1 huruf), fungsi langsung dijalankan
+            $("#searchBox").keyup(function() {
+                
+                var searchString = $(this).val();
+                
+                $("#companyList .company").css("color", "black");
+
+                // 2. Cek apakah kotak pencarian tidak kosong
+                if (searchString !== "") {
+                    $("#companyList .company:contains('" + searchString + "')").css("color", "red");
+                }
+                
+            });
+
+        });
+    </script>
+
+</body>
+</html>

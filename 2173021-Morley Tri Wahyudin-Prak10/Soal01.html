@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2173021 Morley Tri Wahyudin Soal 01</title>
+    <script src="jquery.js"></script>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 20px;
+        }
+        h2 {
+            font-size: 1.2em;
+        }
+        .filter-box {
+            border: 1px solid black;
+            padding: 15px;
+            width: fit-content;
+            margin-bottom: 20px;
+            min-width: 300px;
+        }
+        .filter-box div {
+            margin-bottom: 5px;
+        }
+        button {
+            margin-top: 10px;
+        }
+        table {
+            border-collapse: collapse;
+            border: 2px solid black;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px 10px;
+            text-align: left;
+        }
+        th {
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Selamat! Berikut adalah Daftar Mahasiswa yang mendapat Nilai A Pemograman Web SI Tahun Ajaran 2023/2024</h2>
+
+    <div class="filter-box">
+        <div><input type="radio" name="kelas" value="all" checked> All</div>
+        <div><input type="radio" name="kelas" value="A"> Kelas A</div>
+        <div><input type="radio" name="kelas" value="B"> Kelas B</div>
+        <button id="btnSearch">Search</button>
+    </div>
+
+    <table id="tabelMahasiswa" style="display: none;">
+        <thead>
+            <tr>
+                <th>NRP</th>
+                <th>NAMA</th>
+                <th>KELAS</th>
+                <th>NILAI AKHIR</th>
+            </tr>
+        </thead>
+        <tbody>
+            </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function() {
+            $("#btnSearch").click(function() {
+                // Calling nilai radio button yang dipilih
+                let kelasPilihan = $(":radio[name='kelas']:checked").val();
+                let urlData = "";
+
+                //Penentuan jika Semua diambil dari "nilai.js",kelas a "nilaiA.js" dan nilai b "nilaiB.js"
+                if (kelasPilihan === "all") {
+                    urlData = "nilai.js";
+                } else if (kelasPilihan === "A") {
+                    urlData = "nilaiA.js";
+                } else if (kelasPilihan === "B") {
+                    urlData = "nilaiB.js";
+                }
+  
+                $.getJSON(urlData, function(data) {
+                    let tbody = $("#tabelMahasiswa tbody");
+                    tbody.empty(); 
+
+                    $.each(data.nilai, function(index, mahasiswa) {
+                        let baris = "<tr>" +
+                                        "<td>" + mahasiswa.nrp + "</td>" +
+                                        "<td>" + mahasiswa.nama + "</td>" +
+                                        "<td>" + mahasiswa.kelas + "</td>" +
+                                        "<td>" + mahasiswa.nilaiakhir + "</td>" +
+                                    "</tr>";
+                        tbody.append(baris);
+                    });
+
+                    // call untuk menunjukan tablenya.
+                    $("#tabelMahasiswa").show();
+                    $("#tabelMahasiswa tbody tr:even").css("background-color", "#FFFFCC");
+                    $("#tabelMahasiswa tbody tr:odd").css("background-color", "#CCFFAA");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

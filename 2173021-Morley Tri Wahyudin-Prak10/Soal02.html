@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2173021 Morley Tri Wahyudin Soal 02</title>
+    <script src="jquery.js"></script>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 20px;
+        }
+        .main-container {
+            border: 2px solid black;
+            width: 800px;
+            padding: 2px;
+        }
+        .box {
+            border: 1px solid black;
+            padding: 5px 10px;
+            margin-bottom: 2px;
+            min-height: 20px;
+        }
+        .box:last-child {
+            margin-bottom: 0;
+        }
+        .btn-look {
+            margin-top: 15px;
+            padding: 5px 15px;
+            cursor: pointer;
+        }
+        .header-loaded {
+            text-align: center;
+        }
+        .header-loaded a {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: blue;
+            text-decoration: underline;
+        }
+        a {
+            color: blue;
+            text-decoration: underline;
+        }
+        .course-item {
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div id="header-box" class="box">Title</div>
+        <div id="content-box" class="box">Content</div>
+        <div id="footer-box" class="box">Generator</div>
+    </div>
+
+    <button id="btnLook" class="btn-look">Look</button>
+
+    <script>
+        $(document).ready(function() {
+            const dataWeb = {
+                "title": "Portal S1-Sistem Informasi",
+                "link": "http://si.itmaranatha.org",
+                "generator": "S1-SI FIT UKM",
+                "items": [
+                    {
+                        "title": "BIE02 - Pemrograman Web",
+                        "link": "https://morning.maranatha.edu/course/view.php?id=4245",
+                        "universitas": {"m":"http://www.itmaranatha.org/"},
+                        "description": "Matakuliah ini akan mengenalkan dan mengajarkan mahasiswa tentang dasar-dasar dalam pemrograman web. Di sini mahasiswa akan mempelajari penulisan tag-tag HTML sebagai pembentuk dasar dari suatu halaman web, mahasiswa juga akan mempelajari CSS sebagai pelengkap fungsionalitas dari HTML.<br/>Selain itu mahasiswa juga akan mempelajari pemrograman web di sisi klien (client side scripting) dengan menggunakan Java Script. Dan sebagai pengenalan teknologi baru, mahasiswa juga akan mempelajari sekilas mengenai teknologi JQuery dan teknologi JSON.",
+                        "published": "01-January-2023",
+                        "author": "Dosen S1-SI",
+                        "tags": "S1-Sistem Informasi, Pemrograman Web"
+                    },
+                    {
+                        "title": "IS407 - Basis Data 2",
+                        "link": "http://si.itmaranatha.org/index.php/is407-basis-data-2",
+                        "universitas": {"m":"http://www.itmaranatha.org/"},
+                        "description": "Mata kuliah ini mengajarkan kepada mahasiswa bahasa pemrograman SQL yang meliputi : Perintah SQL untuk mengambil data dari tabel dan mengurutkan data, fungsi-fungsi yang terdapat pada oracle seperti fungsi tanggal dll, Join table, Operasi DDL, DML, Constraint, Subquery, View, Index dan PL/SQL.",
+                        "published": "01-January-2023",
+                        "author": "Dosen S1-SI",
+                        "tags": "S1-Sistem Informasi, Basis Data 2"
+                    }
+                ]
+            };
+
+            $("#btnLook").click(function() {
+                let headerHtml = `<a href="${dataWeb.link}" target="_blank">${dataWeb.title}</a>`;
+                $("#header-box").html(headerHtml).addClass("header-loaded");
+
+                let contentHtml = "";
+                $.each(dataWeb.items, function(index, item) {
+                    contentHtml += `
+                        <div class="course-item">
+                            <a href="${item.link}" target="_blank">${item.title}</a><br>
+                            <i>By : ${item.author} / ${item.published}</i><br><br>
+                            
+                            <div>${item.description}</div><br>
+                            
+                            Universitas : <a href="${item.universitas.m}" target="_blank">Click Here</a><br>
+                            Tag(s) : ${item.tags}
+                        </div>
+                    `;
+                });
+                $("#content-box").html(contentHtml);
+
+                $("#footer-box").html(`&copy;${dataWeb.generator}`);
+            });
+        });
+    </script>
+</body>
+</html>
